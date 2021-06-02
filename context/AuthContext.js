@@ -80,7 +80,8 @@ export const AuthProvider = ({ children }) => {
       setUser(null)
       if (
         router.pathname === '/account/dashboard' ||
-        router.pathname === '/events/add'
+        router.pathname === '/events/add' ||
+        router.pathname === '/events/edit/[id]'
       ) {
         router.push('/account/login')
       }

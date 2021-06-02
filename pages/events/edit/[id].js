@@ -1,3 +1,5 @@
+import { useContext } from 'react'
+import AuthContext from '/context/AuthContext'
 import moment from 'moment'
 import { FaImage } from 'react-icons/fa'
 import { ToastContainer, toast } from 'react-toastify'
@@ -14,6 +16,12 @@ import { API_URL } from '/config/index'
 import styles from '/styles/Form.module.css'
 
 export default function EditEventPage({ evt, token }) {
+  const { user } = useContext(AuthContext)
+
+  if (!user) {
+    return null
+  }
+
   const [values, setValues] = useState({
     name: evt.name,
     performers: evt.performers,
@@ -191,12 +199,13 @@ export async function getServerSideProps({ params: { id }, req }) {
   const { token } = parseCookies(req)
 
   const res = await fetch(`${API_URL}/events/${id}`)
-  const evt = await res.json()
+
+  const evt = res.ok ? await res.json() : ''
 
   return {
     props: {
       evt,
-      token,
+      token: token || '',
     },
   }
 }
