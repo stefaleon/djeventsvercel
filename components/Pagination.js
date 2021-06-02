@@ -1,8 +1,8 @@
-import Link from 'next/link';
-import { PER_PAGE } from '@/config/index';
+import Link from 'next/link'
+import { PER_PAGE } from '/config/index'
 
 export default function Pagination({ page, total }) {
-  const lastPage = Math.ceil(total / PER_PAGE);
+  const lastPage = Math.ceil(total / PER_PAGE)
   return (
     <>
       {page > 1 && (
@@ -17,5 +17,5 @@ export default function Pagination({ page, total }) {
         </Link>
       )}
     </>
-  );
+  )
 }

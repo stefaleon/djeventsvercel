@@ -1,17 +1,17 @@
-import { useState } from 'react';
-import { API_URL } from '@/config/index';
-import styles from '@/styles/Form.module.css';
+import { useState } from 'react'
+import { API_URL } from '/config/index'
+import styles from '/styles/Form.module.css'
 
 export default function ImageUpload({ evtId, imageUploaded, token }) {
-  const [image, setImage] = useState(null);
+  const [image, setImage] = useState(null)
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    const formData = new FormData();
-    formData.append('files', image);
-    formData.append('ref', 'events');
-    formData.append('refId', evtId);
-    formData.append('field', 'image');
+    e.preventDefault()
+    const formData = new FormData()
+    formData.append('files', image)
+    formData.append('ref', 'events')
+    formData.append('refId', evtId)
+    formData.append('field', 'image')
 
     const res = await fetch(`${API_URL}/upload`, {
       method: 'POST',
@@ -19,16 +19,16 @@ export default function ImageUpload({ evtId, imageUploaded, token }) {
         Authorization: `Bearer ${token}`,
       },
       body: formData,
-    });
+    })
 
     if (res.ok) {
-      imageUploaded();
+      imageUploaded()
     }
-  };
+  }
 
   const handleFileChange = (e) => {
-    setImage(e.target.files[0]);
-  };
+    setImage(e.target.files[0])
+  }
 
   return (
     <div className={styles.form}>
@@ -40,5 +40,5 @@ export default function ImageUpload({ evtId, imageUploaded, token }) {
         <input type="submit" value="Upload" className="btn" />
       </form>
     </div>
-  );
+  )
 }

@@ -1,17 +1,17 @@
-import { useState, useEffect } from 'react';
-import ReactDOM from 'react-dom';
-import { FaTimes } from 'react-icons/fa';
-import styles from '@/styles/Modal.module.css';
+import { useState, useEffect } from 'react'
+import ReactDOM from 'react-dom'
+import { FaTimes } from 'react-icons/fa'
+import styles from '/styles/Modal.module.css'
 
 export default function Modal({ show, onClose, children, title }) {
-  const [isBrowser, setIsBrowser] = useState(false);
+  const [isBrowser, setIsBrowser] = useState(false)
 
-  useEffect(() => setIsBrowser(true));
+  useEffect(() => setIsBrowser(true))
 
   const handleClose = (e) => {
-    e.preventDefault();
-    onClose();
-  };
+    e.preventDefault()
+    onClose()
+  }
 
   const modalContent = show ? (
     <div className={styles.overlay}>
@@ -25,15 +25,15 @@ export default function Modal({ show, onClose, children, title }) {
         <div className={styles.body}>{children}</div>
       </div>
     </div>
-  ) : null;
+  ) : null
 
   if (isBrowser) {
     return ReactDOM.createPortal(
       modalContent,
       document.getElementById('modal-root')
-    );
+    )
   } else {
-    return null;
+    return null
   }
 }
 
